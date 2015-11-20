@@ -10,7 +10,7 @@
 #include <iostream>
 #include "Queue.hpp" // see for function descriptions
 
-Queue::Queue(int val)
+Queue::Queue(Creature* val)
 {
 	back = new Queuenode(val); // will be -1 when created, so empty node
 	front = back;	// front and back are the same thing at this point
@@ -41,16 +41,16 @@ Queue::~Queue()
 	}	
 }
 
-int Queue::addBack(int val)
+bool Queue::addBack(Creature* val)
 {
 	/* if negative value, don't add anything */
-	if(val < 0)
-		return -1;
+	if(val == NULL)
+		return false;
 	else
 	{
 		/* first element added; works if "virgin" or if other nodes exist 
 		 * reuses back node to save memory */
-		if(back->value == -1 && back == front) // if back is front and empty
+		if(back->value == NULL && back == front) // if back is front and empty
 			back->value = val;
 
 		/* "virgin" 2nd node (only 2 node pointers in existence) */
@@ -104,13 +104,13 @@ int Queue::addBack(int val)
 	}
 }
 
-int Queue::removeFront()
+Creature* Queue::removeFront()
 {
-	int frontval = getFront();
+	Creature* frontval = getFront();
 
-	if(frontval >= 0) // front (and list) is not empty
+	if(frontval != NULL) // front (and list) is not empty
 	{
-		front->value = -1; // set front value to empty (i.e. "remove" it)
+		front->value = NULL; // set front value to empty (i.e. "remove" it)
 
 		if(back != front) // only set new front if more than 1 item in list
 			front = front->behind;
@@ -119,7 +119,7 @@ int Queue::removeFront()
 	return frontval;	// return value; may be -1 if empty queue
 }
 
-int Queue::getFront() const
+Creature* Queue::getFront() const
 {
 	// !!!!! removed the following error message so that the end user
 	// !!!!! can test for empty queue without littering output. This
@@ -135,34 +135,34 @@ int Queue::getFront() const
 }
 
 /* REMOVED DUE TO ASSIGNMENT DESIGN INSTRUCTIONS */
-// void Queue::displayQueue()
-// {
-// 	int count = 0;
-// 	// std::cout << "    front: " << front->value << "    " << "back: " << back->value << std::endl;
-// 	if(front->value != -1)
-// 	{
+void Queue::displayQueue()
+{
+	int count = 0;
+	// std::cout << "    front: " << front->value << "    " << "back: " << back->value << std::endl;
+	if(front->value != NULL)
+	{
 		/* loop through queue and print values */
-		// Queuenode *tempPtr = front;
-		// std::cout << "    front pointer is: " << front << "   \n";
+		Queuenode *tempPtr = front;
+		std::cout << "    front pointer is: " << front << "   \n";
 		
-		// do
-		// {
-		// 	if(tempPtr->value != -1) // if not empty node
-		// 	{
-		// 		count++;
-		// 		std::cout << "value at node " << count << " is: " << tempPtr->value << std::endl;
+		do
+		{
+			if(tempPtr->value != NULL) // if not empty node
+			{
+				count++;
+				std::cout << "value at node " << count << " is: " << tempPtr->value << std::endl;
 				/* comment out next three lines for no pointer addresses */
-// 				std::cout << "    pointer is: " << tempPtr << std::endl;
-// 				std::cout << "    ahead pointer is: " << tempPtr->ahead << std::endl;
-// 				std::cout << "    behind pointer is: " << tempPtr->behind << std::endl;
-// 			}
+				std::cout << "    pointer is: " << tempPtr << std::endl;
+				std::cout << "    ahead pointer is: " << tempPtr->ahead << std::endl;
+				std::cout << "    behind pointer is: " << tempPtr->behind << std::endl;
+			}
 
-// 			tempPtr = tempPtr->behind;
-// 		} while(tempPtr != front); // when it has gone all the way around it will be equal to front again
+			tempPtr = tempPtr->behind;
+		} while(tempPtr != front); // when it has gone all the way around it will be equal to front again
 
-// 		std::cout << "    back pointer is: " << back;
-// 		std::cout << std::endl;
-// 	}
-// 	else // if front (or back) is -1, nothing is in queue
-// 		std::cout << "Queue is empty" << std::endl;
-// }
+		std::cout << "    back pointer is: " << back;
+		std::cout << std::endl;
+	}
+	else // if front (or back) is -1, nothing is in queue
+		std::cout << "Queue is empty" << std::endl;
+}

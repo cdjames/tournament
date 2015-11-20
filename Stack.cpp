@@ -25,7 +25,7 @@ Stack::~Stack()
 	}	
 }
 
-void Stack::add(int val)
+void Stack::add(Creature *val)
 {
 	if(!head) // if head is null
 		head = new Stacknode(val); // head will be the first node
@@ -39,18 +39,18 @@ void Stack::add(int val)
 	}
 }
 
-int Stack::remove()
+Creature* Stack::remove()
 {
 	if(head) // if it's not null
 	{
 		Stacknode *tempPtr = head; // point at head
-		int temp_val = tempPtr->value;	// save the value
+		Creature* temp_val = tempPtr->value;	// save the value
 		head = head->next;	// next node is new head
 		delete tempPtr;		// get rid if old head
 		return temp_val;	
 	}
 	else	// if head is null
-		return -12345;	// return junk number
+		return NULL;	// return junk number
 }
 
 void Stack::displayStack()

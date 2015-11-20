@@ -7,6 +7,7 @@
 
 #ifndef STACK_HPP
 #define STACK_HPP
+#include "Creature.hpp"
 
 class Stack
 {
@@ -14,10 +15,10 @@ protected:
 	/* container structure for nodes */
 	struct Stacknode
 	{
-		int value;
+		Creature *value;
 		Stacknode *next; // link to next node
 		/* constructor; set a value and before/after nodes */
-		Stacknode(int val, Stacknode *nextnode = NULL)
+		Stacknode(Creature *val = NULL, Stacknode *nextnode = NULL)
 		{
 			value = val;
 			next = nextnode;
@@ -42,14 +43,14 @@ public:
 	** Description: 
 	** Add a value to the stack. Value will be on top of the stack (LIFO)
 	*********************************************************************/
-	void add(int val);
+	void add(Creature *val);
 
 	/*********************************************************************
 	** Description: 
 	** Remove a value from the stack. Return the value before removing. 
 	** Return -12345 if stack is empty.
 	*********************************************************************/
-	int remove();
+	Creature* remove();
 
 	/*********************************************************************
 	** Description: 

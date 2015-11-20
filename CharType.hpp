@@ -1,13 +1,7 @@
 /*********************************************************************
 ** Author: Collin James
-** Date: 
-** Description: 
+** Date: 11/8/15
+** Description: An enumerator to be used with Creatures.
 *********************************************************************/
 
-#include <iostream>
-#include <iomanip>
-
-int main()
-{
-	std::cout << 10%4 << std::endl;
-}
+enum CharType { NONE=0, GOBLIN, BARB, REPTILE, BLUEMEN, SHADOW };

@@ -4,10 +4,15 @@
 # replace 'your_file' below with your actual source file names.
 # add more if needed.
 
-CXX = Queue.cpp
-CXX += main.cpp 
+CXX = Creature.cpp
+CXX += Goblin.cpp
+CXX += Barbarian.cpp
+CXX += Reptile.cpp
+CXX += Bluemen.cpp
+CXX += Shadow.cpp
+CXX += game.cpp 
 
-PROG1 = main
+PROG1 = game
 
 default:
 	g++ ${CXX} -o ${PROG1}

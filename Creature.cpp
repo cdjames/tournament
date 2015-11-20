@@ -167,3 +167,11 @@ void Creature::revive()
 	strength = orig_strength;
 	is_dead = attack_halved = is_knocked_out = false;
 }
+
+int Creature::heal(int factor)
+{
+	int heal_amount;
+	heal_amount = (orig_strength - strength) / factor; // factor will be 2 by default
+	this->strength += heal_amount;
+	return this->strength;
+}

@@ -72,35 +72,35 @@ int main()
 	// std::cout << "Barbarian attack roll: " << getRoll() << std::endl;
 	
 	/* One on one fight! */
-	// doFight(shadow, shadow2, creature, p1kills, p2kills);
+	doFight(group[1], group[0], creature, p1kills, p2kills);
 	
 	/* One on 5 fight! */
 	// doFight(shadow, group, creature, NUMBLUES);
 
 	/* Print out each Creature's attribute */
-	for (int i = 0; i < NUMBLUES; i++)
-	{
-		group[i]->listStats();
-	}
+	// for (int i = 0; i < NUMBLUES; i++)
+	// {
+	// 	group[i]->listStats();
+	// }
 
-	/* Aggregate fights */
-	std::cout << "--------------FIGHT!--------------" << std::endl;
-	for (int x = 0; x < 5; x++)
-	{
-		for (int i = 0; i < 5; i++)
-		{			
-			for (int y = 0; y < 100; y++)
-			{
-				doFight(group[x], group2[i], creature, p1kills, p2kills);
-				group[x]->revive();
-				group2[i]->revive();
-				num_battles++;
-			}
-			std::cout << creature[x+1] << "1 won " << p1kills << " times.\n";
-			std::cout << creature2[i+1] << "2 won " << p2kills << " times.\n" << std::endl;
-			p1kills = p2kills = 0;
-		}
-	}
+	// /* Aggregate fights */
+	// std::cout << "--------------FIGHT!--------------" << std::endl;
+	// for (int x = 0; x < 5; x++)
+	// {
+	// 	for (int i = 0; i < 5; i++)
+	// 	{			
+	// 		for (int y = 0; y < 100; y++)
+	// 		{
+	// 			doFight(group[x], group2[i], creature, p1kills, p2kills);
+	// 			group[x]->revive();
+	// 			group2[i]->revive();
+	// 			num_battles++;
+	// 		}
+	// 		std::cout << creature[x+1] << "1 won " << p1kills << " times.\n";
+	// 		std::cout << creature2[i+1] << "2 won " << p2kills << " times.\n" << std::endl;
+	// 		p1kills = p2kills = 0;
+	// 	}
+	// }
 
 	// delete conan;
 	// delete highlander;
@@ -112,7 +112,7 @@ int main()
 	// delete hobgoblin;
 	// delete shadow;
 	// delete shadow2;
-	std::cout << "In " << num_battles << " battles, " << NUMBLUES * 100 << " of which each creature fought in," << std::endl;
+	// std::cout << "In " << num_battles << " battles, " << NUMBLUES * 100 << " of which each creature fought in," << std::endl;
 	for (int i = 0; i < NUMBLUES; i++)
 	{
 		delete group[i];
@@ -133,10 +133,12 @@ void doFight(Creature *opp1, Creature *opp2, std::string creature[], int &p1kill
 		{
 			opp2_damage = opp1->attacks(opp2);
 
-			// if(opp2_damage >= 0)
-			// {
-				// std::cout << opp1_name << " inflicts " << opp2_damage << " damage on " << opp2_name << "." << std::endl;
-				// std::cout << opp2_name << " strength: " << opp2->getStrength() << std::endl;
+			if(opp2_damage > 0 && !opp2->isDead())
+			{
+				opp2->heal();
+			}
+				std::cout << opp1_name << " inflicts " << opp2_damage << " damage on " << opp2_name << "." << std::endl;
+				std::cout << opp2_name << " strength: " << opp2->getStrength() << std::endl;
 			// }
 			// else 
 				// if(opp2_damage == -2)
@@ -149,8 +151,8 @@ void doFight(Creature *opp1, Creature *opp2, std::string creature[], int &p1kill
 
 			// if(opp1_damage >= 0)
 			// {
-				// std::cout << opp2_name << " inflicts " << opp1_damage << " damage on " << opp1_name << "." << std::endl;
-				// std::cout << opp1_name << " strength: " << opp1->getStrength() << std::endl;
+				std::cout << opp2_name << " inflicts " << opp1_damage << " damage on " << opp1_name << "." << std::endl;
+				std::cout << opp1_name << " strength: " << opp1->getStrength() << std::endl;
 			// }
 			// else 
 				// if(opp1_damage == -2)
@@ -159,14 +161,14 @@ void doFight(Creature *opp1, Creature *opp2, std::string creature[], int &p1kill
 	}
 	if(opp2->isDead())
 	{
-		// std::cout << opp1_name << " has killed " << opp2_name << "." << std::endl;
-		// std::cout << opp1_name << " strength: " << opp1->getStrength() << std::endl;
+		std::cout << opp1_name << " has killed " << opp2_name << "." << std::endl;
+		std::cout << opp1_name << " strength: " << opp1->getStrength() << std::endl;
 		p1kills++;
 	}
 	else if(opp1->isDead())
 	{
-		// std::cout << opp2_name << " has killed " << opp1_name << "." << std::endl;
-		// std::cout << opp2_name << " strength: " << opp2->getStrength() << std::endl;
+		std::cout << opp2_name << " has killed " << opp1_name << "." << std::endl;
+		std::cout << opp2_name << " strength: " << opp2->getStrength() << std::endl;
 		p2kills++;
 	}
 }

@@ -52,6 +52,8 @@ public:
 	*********************************************************************/
 	Creature* remove();
 
+	Creature* get();
+
 	/*********************************************************************
 	** Description: 
 	** Loop through stack and print values separated by spaces. If empty

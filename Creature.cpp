@@ -175,3 +175,8 @@ int Creature::heal(int factor)
 	this->strength += heal_amount;
 	return this->strength;
 }
+
+void Creature::kill()
+{
+	computeStrength(orig_strength);
+}

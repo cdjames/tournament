@@ -5,13 +5,14 @@
 # add more if needed.
 
 CXX = Creature.cpp
-# CXX += Goblin.cpp
+CXX += Goblin.cpp
 CXX += Barbarian.cpp
-# CXX += Reptile.cpp
-# CXX += Bluemen.cpp
-# CXX += Shadow.cpp
+CXX += Reptile.cpp
+CXX += Bluemen.cpp
+CXX += Shadow.cpp
 CXX += Stack.cpp
 CXX += Queue.cpp
+CXX += Team.cpp
 # CXX += game.cpp 
 CXX += main.cpp 
 

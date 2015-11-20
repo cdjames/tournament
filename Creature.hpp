@@ -145,6 +145,8 @@ public:
 	*********************************************************************/
 	virtual int heal(int factor = 2);
 
+	virtual void kill();
+
 }; // class Creature
 
 #endif

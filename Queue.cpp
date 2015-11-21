@@ -28,7 +28,8 @@ Queue::~Queue()
 	{
 		Queuenode *trash = tempPtr;
 		// std::cout << "deleting " << tempPtr << std::endl; // uncomment for quiet deletion
-		
+		// std::cout << "tempPtr->behind: " << tempPtr->behind << std::endl;
+		// std::cout << "front: " << front << std::endl;
 		if(tempPtr->behind == front)
 			done = true;
 		else
@@ -37,8 +38,11 @@ Queue::~Queue()
 			// std::cout << "next: " << tempPtr << std::endl; // uncomment for quiet deletion
 		}
 		
-		delete trash;
+		// std::cout << "trash: " << trash << std::endl;
+		if(trash)
+			delete trash;
 	}	
+	// std::cout << "emptied trash" << std::endl;
 }
 
 bool Queue::addBack(Creature* val)

@@ -18,8 +18,11 @@ Team::Team()
 
 Team::~Team()
 {
-	delete members;
-	delete losers;
+	// std::cout << "team " << this << " out." << std::endl;
+	if(members)
+		delete members;
+	if(losers)
+		delete losers;
 }
 
 void Team::addMember(Creature* creature)
@@ -28,7 +31,7 @@ void Team::addMember(Creature* creature)
 	{
 		members->addBack(creature);
 		active_members++;
-		std::cout << "member added!" << std::endl;
+		// std::cout << "member added!" << std::endl;
 	}
 	return;
 }

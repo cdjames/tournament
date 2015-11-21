@@ -14,9 +14,9 @@ Tournament::Tournament(Team* one, Team* two) : killBonus(50)
 	creature[0] = "None";
 	creature[1] = "Goblin";
 	creature[2] = "Barbarian";
-	creature[3] = "Reptile";
-	creature[4] = "Blue Man";
-	creature[5] = "Shadow";
+	creature[3] = "Shadow";
+	creature[4] = "Reptile";
+	creature[5] = "Blue Man";
 	rounds = 0;
 }
 

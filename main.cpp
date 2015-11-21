@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include "Creature.hpp"
+// #include "CharType.hpp"
 #include "Barbarian.hpp"
 #include "Reptile.hpp"
 #include "Bluemen.hpp"
@@ -18,6 +19,16 @@
 #include <stdlib.h>		// for srand()
 #include <ctime>		// for time()
 
+int mainMenu(int player);
+
+void intakeInt(int &num_items, std::string message);
+
+void clearCin();
+
+bool cinFail();
+
+void addCreature(int type, Team* team);
+
 void initialTesting();
 
 int main()
@@ -25,17 +36,35 @@ int main()
 	srand(std::time(0)); // seed the random number generator used Creature die function
 
 	/* testing Tournament */
-	Team* testTeam = new Team(1);
-	testTeam->addMember(new Bluemen);
-	testTeam->addMember(new Goblin);
-	testTeam->addMember(new Shadow);
+	Team* team1 = new Team(1);
+	// testTeam->addMember(new Bluemen);
+	// testTeam->addMember(new Goblin);
+	// testTeam->addMember(new Shadow);
 
-	Team* testTeam2 = new Team(2);
-	testTeam2->addMember(new Goblin);
-	testTeam2->addMember(new Goblin);
-	testTeam2->addMember(new Reptile);
+	Team* team2 = new Team(2);
+	// testTeam2->addMember(new Goblin);
+	// testTeam2->addMember(new Goblin);
+	// testTeam2->addMember(new Reptile);
 
-	Tournament* testTourney = new Tournament(testTeam, testTeam2);
+	int rounds;
+	intakeInt(rounds, "the number of rounds.");
+
+	for (int i = 0; i < rounds; i++)
+	{
+		int choice = mainMenu(1);
+		addCreature(choice, team1);
+	}
+
+	for (int i = 0; i < rounds; i++)
+	{
+		int choice = mainMenu(2);
+		addCreature(choice, team2);
+	}
+
+	Tournament* testTourney = new Tournament(team1, team2);
+
+
+
 	std::cout << "Starting tournament." << std::endl;
 	testTourney->doTourney();
 	testTourney->printWinner();
@@ -45,6 +74,94 @@ int main()
 	
 	if(testTourney)
 		delete testTourney;
+}
+
+int mainMenu(int player)
+{
+	int input = -1;
+
+	std::cout << std::endl;
+	std::cout << "Player " << player << ", enter a fighter:" << std::endl;
+	std::cout << "   1 - Goblin" << std::endl;
+	std::cout << "   2 - Barbarian" << std::endl;
+	std::cout << "   3 - Shadow" << std::endl;
+	std::cout << "   4 - Reptile" << std::endl;
+	std::cout << "   5 - Bluemen" << std::endl;
+
+	std::cin >> input;
+
+	/* test for bad input and loop until good */
+	while(input < 1 || input > 5 || cinFail())
+	{
+		std::cout << "Please enter 1-5." << std::endl;
+		clearCin(); // clear cin, otherwise endless loop!
+		input = mainMenu(player); // run menu again
+	}
+
+	return input;
+}
+
+void addCreature(int type, Team* team)
+{
+	switch(type)
+	{
+		case GOBLIN: // 1
+			team->addMember(new Goblin);
+			break;
+		case BARB: // 2
+			team->addMember(new Barbarian);
+			break;
+		case SHADOW: // 3
+			team->addMember(new Shadow);
+			break;
+		case REPTILE: // 4
+			team->addMember(new Reptile);
+			break;
+		case BLUEMEN: // 5
+			team->addMember(new Bluemen);
+			break;
+		default:
+			break;
+
+	}
+}
+
+void intakeInt(int &num_items, std::string message)
+{ // not in spec
+	// int imax = std::numeric_limits<int>::max(); // upper limit for ints on system
+	int imax = 20; // upper limit for ints on system
+	std::cout << "Please enter "<< message << std::endl;
+	
+	do{
+		std::cin >> num_items;
+		if(cinFail()) // some bad or strange input
+			std::cout << "Please enter a correct value." << std::endl;
+		else if (num_items <= 0)
+			std::cout << "Please enter a positive number." << std::endl;
+		else if (num_items > imax)
+			std::cout << "Please enter a lower number." << std::endl;
+
+	} while (cinFail() || num_items <= 0 || num_items > imax);
+
+	clearCin();
+	return;
+}
+
+void clearCin()
+{
+	std::cin.clear();
+	std::cin.ignore(50, '\n');
+}
+
+bool cinFail()
+{
+	bool failed = false;
+	if(std::cin.fail()) // check for bad input
+	{
+		clearCin(); // ignore the bad input
+		failed = true;
+	}
+	return failed;
 }
 
 void initialTesting()

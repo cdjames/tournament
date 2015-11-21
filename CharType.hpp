@@ -4,4 +4,4 @@
 ** Description: An enumerator to be used with Creatures.
 *********************************************************************/
 
-enum CharType { NONE=0, GOBLIN, BARB, REPTILE, BLUEMEN, SHADOW };
+enum CharType { NONE=0, GOBLIN, BARB, SHADOW, REPTILE, BLUEMEN };

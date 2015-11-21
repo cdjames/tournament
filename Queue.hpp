@@ -39,6 +39,14 @@ protected:
 
 	Queuenode *front; 	// points to front of queue
 	Queuenode *back;	// points to back of queue	
+	
+	// umm, for testing
+	/********************************************************************
+	** Description: 
+	** Loop through queue and print values (and pointer addresses). If 
+	** empty print "Queue is empty". Print from front to back.
+	********************************************************************/
+	void displayQueue();
 public:
 	/*********************************************************************
 	** Description: 
@@ -75,14 +83,6 @@ public:
 	** -1 if queue is empty. Used in removeFront()
 	*********************************************************************/
 	Creature* getFront() const;
-
-	// umm, for testing
-	/********************************************************************
-	** Description: 
-	** Loop through queue and print values (and pointer addresses). If 
-	** empty print "Queue is empty". Print from front to back.
-	********************************************************************/
-	void displayQueue();
 };
 
 #endif

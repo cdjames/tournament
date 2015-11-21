@@ -5,15 +5,12 @@
 *********************************************************************/
 
 #include <iostream>
-#include "Creature.hpp"
-// #include "CharType.hpp" // already in Creature.hpp
+#include "Creature.hpp" // "CharType.hpp" in Creature.hpp
 #include "Barbarian.hpp"
 #include "Reptile.hpp"
 #include "Bluemen.hpp"
 #include "Goblin.hpp"
 #include "Shadow.hpp"
-// #include "Stack.hpp"
-// #include "Queue.hpp"
 #include "Team.hpp"
 #include "Tournament.hpp"
 #include <stdlib.h>		// for srand()

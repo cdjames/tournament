@@ -138,7 +138,7 @@ Creature* Queue::getFront() const
 	return front->value;
 }
 
-/* REMOVED DUE TO ASSIGNMENT DESIGN INSTRUCTIONS */
+/* FOR TESTING */
 void Queue::displayQueue()
 {
 	int count = 0;

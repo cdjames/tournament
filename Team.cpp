@@ -1,38 +1,44 @@
 /*********************************************************************
 ** Author: Collin James
-** Date: 
-** Description: 
+** Date: 11/21/15
+** Description: A class that holds a Queue of Creatures. Is able to 
+** add members, get them, release them, get and set points, sort its
+** fighters according to whether they are dead or alive, return the
+** number of the team, return number of active members, and reset the
+** team to its original status
+** 
+** Implementation
 *********************************************************************/
-#include "Team.hpp"
+
+#include "Team.hpp"	// please see for function descriptions
 #include <iostream>
-// int points,
-// 		active_members;
-// 	Queue* members;
-// 	Stack* losers;
 	
 Team::Team(int num)
 {
-	members = new Queue;
-	losers = new Stack;
-	number = num;
-	points = 0;
+	/* initilize variables and storage */
+	this->members = new Queue;
+	this->losers = new Stack;
+	this->number = num;
+	this->points = 0;
 }
 
 Team::~Team()
 {
-	// std::cout << "team " << this << " out." << std::endl;
-	if(members)
-		delete members;
-	if(losers)
-		delete losers;
+	/* delete pointers */
+	if(this->members)
+		delete this->members;
+	if(this->losers)
+		delete this->losers;
 }
 
 void Team::addMember(Creature* creature)
 {
+	/* Make sure there is actually a creature and then add it to stack
+	 * Increment active_members */
 	if(creature != NULL)
 	{
-		members->addBack(creature);
-		active_members++;
+		this->members->addBack(creature);
+		this->active_members++;
 		// std::cout << "member added!" << std::endl;
 	}
 	return;
@@ -40,39 +46,43 @@ void Team::addMember(Creature* creature)
 
 Creature* Team::getFrontMember()
 {
-	return members->getFront();
+	return this->members->getFront();
 }
 
 Creature* Team::releaseFrontMember()
 {
-	active_members--;
-	return members->removeFront();
+	this->active_members--;
+	return this->members->removeFront();
 }
 
 int Team::getActiveMembers()
 {
-	return active_members;
+	return this->active_members;
 }
 
 void Team::moveFighters()
 {
-	if(active_members > 0)
+	/* If there are fighters in the members Queue */
+	if(this->active_members > 0)
 	{
-		Creature* tempCr = members->removeFront();
+		Creature* tempCr = this->members->removeFront();
 		bool dead = tempCr->isDead();
 
+		/* if the creature on top of Queue is dead, move it to losers */
 		if(dead)
 		{
-			losers->add(tempCr);
-			active_members--;
+			this->losers->add(tempCr);
+			this->active_members--;
 			// std::cout << "team " << this << " active_members: " << active_members << std::endl;
 		}
+		/* if alive then heal it and put it at back of the Queue */
 		else
 		{
 			// std::cout << "team " << this << " fighter " 
 			// << tempCr->getType() << " healed to " 
 			// << tempCr->heal() << " hit points" << std::endl;
-			members->addBack(tempCr);
+			tempCr->heal();
+			this->members->addBack(tempCr);
 			// std::cout << "team " << this << " active_members: " << active_members << std::endl;
 		}
 	}
@@ -83,7 +93,7 @@ int Team::addPoints(int points)
 {
 	this->points += points;
 	return getPoints();
-	// return points;
+	// return points; // testing
 }
 
 int Team::getPoints()
@@ -94,46 +104,50 @@ int Team::getPoints()
 void Team::resetTeam()
 {
 	int count = 0;
-
-	if(losers->get())
+	/* if any dead creatures, put them back in Queue */
+	if(this->losers->get())
 	{
 		Creature* tempCr = losers->remove();
 		while(tempCr)
 		{
 			std::cout << "tempCr: " << tempCr << std::endl;
 			addMember(tempCr);
-			tempCr = losers->remove();
+			tempCr = this->losers->remove();
 		}
 			
 	}
-	
-	Creature* tempCr = members->removeFront();
+	/* Get top creature from Queue, revive it, and add it to a temporary Queue
+	 * When all revived, add them back to the members Queue */
+	Creature* tempCr = this->members->removeFront();
 	Queue *tempQueue = new Queue;
 	if(tempCr != NULL)
 	{
 		while(tempCr != NULL)
 		{
 			count++;
-			std::cout << "value at node " << count << " is: " << tempCr << std::endl;
+			// std::cout << "value at node " << count << " is: " << tempCr << std::endl;
 			tempCr->revive();
 			tempQueue->addBack(tempCr);
-			tempCr = members->removeFront();
+			tempCr = this->members->removeFront();
 		}
-
+		/* back to members Queue */
 		tempCr = tempQueue->removeFront();
 		while(tempCr != NULL)
 		{
-			members->addBack(tempCr);
+			this->members->addBack(tempCr);
 			tempCr = tempQueue->removeFront();
 		}
 	}
 	else
-		std::cout << "Queue is empty." << std::endl;
-
+		std::cout << "Error: no members." << std::endl;
+	
+	// if(tempQueue)
+	// 	delete tempQueue;
+	
 	return;
 }
 
 int Team::getNumber()
 {
-	return number;
+	return this->number;
 }

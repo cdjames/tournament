@@ -1,70 +1,62 @@
 /*********************************************************************
 ** Author: Collin James
 ** Date: 11/3/15
-** Description: A class that implements a single-linked stack data
+** Description: A class that implements a single-linked IntStack data
 ** structure
 *********************************************************************/
 
-#ifndef STACK_HPP
-#define STACK_HPP
-#include "Creature.hpp"
+#ifndef INTSTACK_HPP
+#define INTSTACK_HPP
 
-class Stack
+class IntStack
 {
 protected:
 	/* container structure for nodes */
-	struct Stacknode
+	struct Intstacknode
 	{
-		Creature *value;
-		Stacknode *next; // link to next node
+		int value;
+		Intstacknode *next; // link to next node
 		/* constructor; set a value and before/after nodes */
-		Stacknode(Creature *val = NULL, Stacknode *nextnode = NULL)
+		Intstacknode(int val, Intstacknode *nextnode = NULL)
 		{
 			value = val;
 			next = nextnode;
 		}
 	};
 
-	Stacknode *head;  // points to item on top
+	Intstacknode *head;  // points to item on top
 
 	/*********************************************************************
 	** Description: 
-	** Loop through stack and print values separated by spaces. If empty
-	** print "Stack is empty". FOR TESTING
+	** Loop through IntStack and print values separated by spaces. If empty
+	** print "IntStack is empty". FOR TESTING
 	*********************************************************************/
-	void displayStack();
-	
+	void displayIntstack();
 public:
 	/*********************************************************************
 	** Description: 
 	** Constructor; set head to null
 	*********************************************************************/
-	Stack();
+	IntStack();
 	
 	/*********************************************************************
 	** Description: 
 	** Deconstructor; loop through nodes and delete pointers
 	*********************************************************************/
-	~Stack();
+	~IntStack();
 
 	/*********************************************************************
 	** Description: 
-	** Add a value to the stack. Value will be on top of the stack (LIFO)
+	** Add a value to the IntStack. Value will be on top of the IntStack (LIFO)
 	*********************************************************************/
-	void add(Creature *val);
+	void add(int val);
 
 	/*********************************************************************
 	** Description: 
-	** Remove a value from the stack. Return the value before removing. 
-	** Return NULL if stack is empty.
+	** Remove a value from the IntStack. Return the value before removing. 
+	** Return -12345 if IntStack is empty.
 	*********************************************************************/
-	Creature* remove();
-
-	/*********************************************************************
-	** Description: 
-	** Return the top value without removing
-	*********************************************************************/
-	Creature* get();
+	int remove();
 };
 
 #endif

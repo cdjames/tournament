@@ -1,6 +1,6 @@
 /*********************************************************************
 ** Author: Collin James
-** Date: 11/5/15
+** Date: 11/5/15 -- updated 11/20/15
 ** Description: An abstract base class for different game creatures,
 ** with a default constructor, various getters, and a function for
 ** generating dice rolls. Contains pure virtual attack and defend
@@ -141,10 +141,17 @@ public:
 
 	/*********************************************************************
 	** Description: 
-	** Restore some health; (origHealth - health) ÷ 2
+	** Restore some health; (origHealth - health) ÷ 2 (or other factor).
+	** Example: Original health 12 - current health 6 = 6÷2 = +3 to health
+	** Returns updated health
 	*********************************************************************/
 	virtual int heal(int factor = 2);
 
+	/*********************************************************************
+	** Description: 
+	** Kill the creature; send its full original strength to computeStrength()
+	** ensuring death. 
+	*********************************************************************/
 	virtual void kill();
 
 }; // class Creature

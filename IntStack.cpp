@@ -1,70 +1,66 @@
 /*********************************************************************
 ** Author: Collin James
 ** Date: 11/3/15
-** Description: A class that implements a single-linked stack data
-** structure; implementation file
+** Description: A class that implements a single-linked IntStack data
+** structure
+**
+** Implementation file
 *********************************************************************/
 
 #include <iostream>
-#include "Stack.hpp" // see for function descriptions
+#include "IntStack.hpp" // see for function descriptions
 
-Stack::Stack()
+IntStack::IntStack()
 {
 	head = NULL;
 }
 
-Stack::~Stack()
+IntStack::~IntStack()
 {
-	Stacknode *tempPtr = head; // point at head
+	Intstacknode *tempPtr = head; // point at head
 	/* loop until tempPtr is NULL */
 	while(tempPtr)
 	{
-		Stacknode *trash = tempPtr; // point at current tempPtr
-		tempPtr = tempPtr->next;	// set to next pointer in stack
+		Intstacknode *trash = tempPtr; // point at current tempPtr
+		tempPtr = tempPtr->next;	// set to next pointer in IntStack
 		delete trash;				// delete the pointer
 	}	
 }
 
-void Stack::add(Creature *val)
+void IntStack::add(int val)
 {
 	if(!head) // if head is null
-		head = new Stacknode(val); // head will be the first node
+		head = new Intstacknode(val); // head will be the first node
 	else
 	{
 		/* create a new node, where head becomes the next node down the list */
-		Stacknode *newnode = new Stacknode(val, head);
+		Intstacknode *newnode = new Intstacknode(val, head);
 		
 		/* now make head point back to the beginning of the list*/
 		head = newnode;
 	}
 }
 
-Creature* Stack::remove()
+int IntStack::remove()
 {
 	if(head) // if it's not null
 	{
-		Stacknode *tempPtr = head; // point at head
-		Creature* temp_val = tempPtr->value;	// save the value
+		Intstacknode *tempPtr = head; // point at head
+		int temp_val = tempPtr->value;	// save the value
 		head = head->next;	// next node is new head
 		delete tempPtr;		// get rid if old head
 		return temp_val;	
 	}
 	else	// if head is null
-		return NULL;	// return junk number
+		return -12345;	// return junk number
 }
 
-Creature* Stack::get()
-{
-	// std::cout << "head value is: " << head->value << std::endl;
-	return head->value;
-}
-
-void Stack::displayStack() // for testing
+void IntStack::displayIntstack() // for testing
 {
 	if(head)
 	{
-		/* loop through stack and print values */
-		Stacknode *tempPtr = head;
+		/* loop through IntStack and print values */
+		Intstacknode *tempPtr = head;
 		std::cout << "head pointer is: " << head << "   \n";
 		while(tempPtr)
 		{
@@ -77,6 +73,6 @@ void Stack::displayStack() // for testing
 		}	
 		std::cout << std::endl;
 	}
-	else	// if head is null, nothing is in stack
-		std::cout << "Stack is empty" << std::endl;
+	else	// if head is null, nothing is in IntStack
+		std::cout << "IntStack is empty" << std::endl;
 }

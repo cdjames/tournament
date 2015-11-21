@@ -1,6 +1,6 @@
 /*********************************************************************
 ** Author: Collin James
-** Date: 11/5/15
+** Date: 11/5/15 -- updated 11/20/15
 ** Description: An abstract base class for different game creatures,
 ** with a default constructor, various getters, and a function for
 ** generating dice rolls. Contains pure virtual attack and defend

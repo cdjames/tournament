@@ -10,7 +10,7 @@ Tournament::Tournament(Team* one, Team* two) : killBonus(10)
 {
 	team1 = one;
 	team2 = two;
-	top3 = new Queue;
+	top3 = new Stack;
 	standings = new Stack;
 	// creature[1] = { "None", "Goblin", "Barbarian", "Reptile", "Blue Man", "The Shadow" };
 	creature[0] = "None";
@@ -47,8 +47,8 @@ void Tournament::doTourney()
 
 void Tournament::doRound(Creature* opp1, Creature* opp2)
 {
-	int opp1_damage = 0;
-	int opp2_damage = 0;
+	int opp1_damage, opp2_damage, p1kills, p2kills;
+	p1kills = p2kills = opp1_damage = opp2_damage = 0;
 	CharType opp1_type = opp1->getType();
 	CharType opp2_type = opp2->getType();
 	std::string opp1_name = "Player 1 " + creature[opp1_type];
@@ -103,6 +103,7 @@ void Tournament::doRound(Creature* opp1, Creature* opp2)
 		std::cout << opp2_name << " has killed " << opp1_name << "." << std::endl;
 		std::cout << opp2_name << " strength: " << opp2->getStrength() << std::endl;
 		// p2kills++;
+		// std::cout << 
 	}
 
 	team1->moveFighters();
@@ -119,6 +120,74 @@ int Tournament::computePoints(CharType attacker_type, CharType defender_type, in
 	return damage * (attacker_type / defender_type);
 }
 
-void Tournament::printStandings(){}
+void Tournament::printStandings()
+{
+	int count = 0;
+	Creature* tempCr = standings->remove();
+	while(tempCr != NULL)
+	{
+		count++;
+		std::cout << creature[tempCr->getType()] << " was " << count 
+				  << ((count == 1) ? "st" : ((count == 2) ? "nd" : ((count == 3) ? "rd" : "th"))) 
+				  << " place." << std::endl;
+		tempCr = standings->remove();
+	}
+}
 
-void Tournament::printWinner(){}
+void Tournament::printWinner()
+{
+	if(team1->getActiveMembers())
+		finishStandings(team1);
+	if(team2->getActiveMembers())
+		finishStandings(team2);
+	Creature* tempCr;
+	for (int i = 1; i < 4; i++)
+	{
+		tempCr = standings->remove();
+		std::cout << creature[tempCr->getType()] << " is " << i 
+				<< ((i == 1) ? "st" : ((i == 2) ? "nd" : ((i == 3) ? "rd" : "th")))
+				<< " place." << std::endl;
+		top3->add(tempCr);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		standings->add(top3->remove());
+	}
+
+	int team1_pts = team1->getPoints(),
+	 	team2_pts = team2->getPoints(),
+		winner, loser, winner_pts, loser_pts;
+	if(team1_pts > team2_pts)
+	{
+		winner = 1;
+		loser = 2;
+		winner_pts = team1_pts;
+		loser_pts = team2_pts;
+		std::cout << "The winner was Team " << winner << " with " 
+				  << winner_pts << " points."  << std::endl;
+		std::cout << "Team " << loser << " had " 
+				  << loser_pts << " points."  << std::endl;
+	}
+	else if(team1_pts < team2_pts)
+	{
+		winner = 2;
+		loser = 1;
+		winner_pts = team2_pts;
+		loser_pts = team1_pts;
+		std::cout << "The winner was Team " << winner << " with " 
+				  << winner_pts << " points."  << std::endl;
+		std::cout << "Team " << loser << " had " 
+				  << loser_pts << " points."  << std::endl;
+	}
+	else
+		std::cout << "It was a tie. Both teams had " << team1_pts << " points." << std::endl;
+}
+
+void Tournament::finishStandings(Team* team)
+{
+	while(team->getActiveMembers())
+	{
+		// std::cout << "in finishStandings, active members is "<< team->getActiveMembers() << std::endl;
+		moveToStandings(team->releaseFrontMember());
+	}
+}

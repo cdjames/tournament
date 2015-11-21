@@ -41,6 +41,12 @@ Creature* Team::getFrontMember()
 	return members->getFront();
 }
 
+Creature* Team::releaseFrontMember()
+{
+	active_members--;
+	return members->removeFront();
+}
+
 int Team::getActiveMembers()
 {
 	return active_members;
@@ -57,10 +63,15 @@ void Team::moveFighters()
 		{
 			losers->add(tempCr);
 			active_members--;
+			std::cout << "team " << this << " active_members: " << active_members << std::endl;
 		}
 		else
 		{
+			std::cout << "team " << this << " fighter " 
+			<< tempCr->getType() << " healed to " 
+			<< tempCr->heal() << " hit points" << std::endl;
 			members->addBack(tempCr);
+			std::cout << "team " << this << " active_members: " << active_members << std::endl;
 		}
 	}
 	return;

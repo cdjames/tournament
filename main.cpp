@@ -16,9 +16,12 @@
 #include "Queue.hpp"
 #include "Team.hpp"
 #include "Tournament.hpp"
+#include <stdlib.h>		// for srand()
+#include <ctime>		// for time()
 
 int main()
 {
+	srand(std::time(0)); // seed the random number generator used Creature die function
 	/* testing Stack */
 	// Stack* testStack = new Stack;
 	// testStack->add(new Barbarian);
@@ -79,13 +82,15 @@ int main()
 	testTeam->addMember(new Bluemen);
 
 	Team* testTeam2 = new Team;
-	testTeam2->addMember(new Goblin);
+	testTeam2->addMember(new Bluemen);
 	testTeam2->addMember(new Reptile);
 	testTeam2->addMember(new Shadow);
 
 	Tournament* testTourney = new Tournament(testTeam, testTeam2);
 	std::cout << "Starting tournament." << std::endl;
 	testTourney->doTourney();
+	testTourney->printWinner();
+	testTourney->printStandings();
 
 	// don't delete teams as they're deleted by testTourney
 	

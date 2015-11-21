@@ -20,6 +20,8 @@ public:
 
 	Creature* getFrontMember();
 
+	Creature* releaseFrontMember();
+
 	int getActiveMembers();
 
 	void moveFighters();

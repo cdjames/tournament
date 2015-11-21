@@ -20,7 +20,7 @@ private:
 	Team* team1;
 	Team* team2;
 	Stack* standings;
-	Queue* top3;
+	Stack* top3;
 	CharType strength;
 	std::string creature[6];
 	const int killBonus;
@@ -42,6 +42,8 @@ public:
 	void printStandings();
 
 	void printWinner();
+
+	void finishStandings(Team* team);
 };
 
 #endif

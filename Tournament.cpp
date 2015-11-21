@@ -99,7 +99,7 @@ void Tournament::doRound(Creature* opp1, Creature* opp2)
 		team1->addPoints(killBonus);
 		// std::cout << "team 1 has " << team1->addPoints(killBonus) << " points" << std::endl;
 		moveToStandings(opp2, 2);
-		std::cout << opp1_name << " has killed " << opp2_name << "." << std::endl;
+		std::cout << "    " << opp1_name << " has killed " << opp2_name << "." << std::endl;
 		// std::cout << opp1_name << " strength: " << opp1->getStrength() << std::endl;
 		// p1kills++;
 	}
@@ -108,7 +108,7 @@ void Tournament::doRound(Creature* opp1, Creature* opp2)
 		moveToStandings(opp1, 1);
 		team2->addPoints(killBonus);
 		// std::cout << "team 2 has " << team2->addPoints(killBonus) << " points" << std::endl;
-		std::cout << opp2_name << " has killed " << opp1_name << "." << std::endl;
+		std::cout << "    " << opp2_name << " has killed " << opp1_name << "." << std::endl;
 		// std::cout << opp2_name << " strength: " << opp2->getStrength() << std::endl;
 		// p2kills++;
 		// std::cout << 

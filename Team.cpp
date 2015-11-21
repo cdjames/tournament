@@ -15,6 +15,7 @@ Team::Team(int num)
 	members = new Queue;
 	losers = new Stack;
 	number = num;
+	points = 0;
 }
 
 Team::~Team()

@@ -6,14 +6,14 @@
 
 #include <iostream>
 #include "Creature.hpp"
-// #include "CharType.hpp"
+// #include "CharType.hpp" // already in Creature.hpp
 #include "Barbarian.hpp"
 #include "Reptile.hpp"
 #include "Bluemen.hpp"
 #include "Goblin.hpp"
 #include "Shadow.hpp"
-#include "Stack.hpp"
-#include "Queue.hpp"
+// #include "Stack.hpp"
+// #include "Queue.hpp"
 #include "Team.hpp"
 #include "Tournament.hpp"
 #include <stdlib.h>		// for srand()
@@ -33,39 +33,32 @@ void initialTesting();
 
 int main()
 {
-	srand(std::time(0)); // seed the random number generator used Creature die function
+	srand(std::time(0)); // seed the random number generator used by Creature die function
 
-	/* testing Tournament */
 	Team* team1 = new Team(1);
-	// testTeam->addMember(new Bluemen);
-	// testTeam->addMember(new Goblin);
-	// testTeam->addMember(new Shadow);
-
 	Team* team2 = new Team(2);
-	// testTeam2->addMember(new Goblin);
-	// testTeam2->addMember(new Goblin);
-	// testTeam2->addMember(new Reptile);
 
 	int rounds;
-	intakeInt(rounds, "the number of rounds.");
+	intakeInt(rounds, "the number of rounds. Max is 20.");
 
+	/* get Player 1 creatures and assemble team */
 	for (int i = 0; i < rounds; i++)
 	{
 		int choice = mainMenu(1);
 		addCreature(choice, team1);
 	}
-
+	/* get Player 2 creatures and assemble team */
 	for (int i = 0; i < rounds; i++)
 	{
 		int choice = mainMenu(2);
 		addCreature(choice, team2);
 	}
 
+	/* assemble Tournament */
 	Tournament* testTourney = new Tournament(team1, team2);
+	/* announce start */
+	std::cout << "Starting tournament..." << std::endl;
 
-
-
-	std::cout << "Starting tournament." << std::endl;
 	testTourney->doTourney();
 	testTourney->printWinner();
 	testTourney->printStandings();

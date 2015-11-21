@@ -38,24 +38,24 @@ int main()
 	Team* team1 = new Team(1);
 	Team* team2 = new Team(2);
 
-	int rounds;
-	intakeInt(rounds, "the number of rounds. Max is 20.");
+	int fighters;
+	intakeInt(fighters, "the number of fighters. Max is 20.");
 
 	/* get Player 1 creatures and assemble team */
-	for (int i = 0; i < rounds; i++)
+	for (int i = 0; i < fighters; i++)
 	{
 		int choice = mainMenu(1);
 		addCreature(choice, team1);
 	}
 	/* get Player 2 creatures and assemble team */
-	for (int i = 0; i < rounds; i++)
+	for (int i = 0; i < fighters; i++)
 	{
 		int choice = mainMenu(2);
 		addCreature(choice, team2);
 	}
 
 	/* assemble Tournament */
-	Tournament* testTourney = new Tournament(team1, team2);
+	Tournament* testTourney = new Tournament(team1, team2, fighters*2);
 	/* announce start */
 	std::cout << "Starting tournament..." << std::endl;
 

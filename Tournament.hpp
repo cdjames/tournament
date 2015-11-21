@@ -26,12 +26,12 @@ private:
 	CharType strength;
 	std::string creature[6];
 	const int killBonus;
-	int rounds;
+	int fighters;
 	IntStack* team;
 	IntStack* top3team;
 	
 public:
-	Tournament(Team* one = NULL, Team* two = NULL);
+	Tournament(Team* one = NULL, Team* two = NULL, int fighters = 2);
 
 	~Tournament();
 	

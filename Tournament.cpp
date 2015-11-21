@@ -3,7 +3,7 @@
 #include <iostream>
 #include <math.h> // for ceil()
 	
-Tournament::Tournament(Team* one, Team* two) : killBonus(50)
+Tournament::Tournament(Team* one, Team* two, int fighters) : killBonus(50)
 {
 	team1 = one;
 	team2 = two;
@@ -17,7 +17,7 @@ Tournament::Tournament(Team* one, Team* two) : killBonus(50)
 	creature[3] = "Shadow";
 	creature[4] = "Reptile";
 	creature[5] = "Blue Man";
-	rounds = 0;
+	this->fighters = fighters;
 }
 
 Tournament::~Tournament()
@@ -49,8 +49,8 @@ void Tournament::doTourney()
 
 void Tournament::doRound(Creature* opp1, Creature* opp2)
 {
-	int opp1_damage, opp2_damage, p1kills, p2kills;
-	p1kills = p2kills = opp1_damage = opp2_damage = 0;
+	int opp1_damage, opp2_damage, p1kills, p2kills, rounds;
+	p1kills = p2kills = opp1_damage = opp2_damage = rounds = 0;
 	CharType opp1_type = opp1->getType();
 	CharType opp2_type = opp2->getType();
 	std::string opp1_name = "Player 1 " + creature[opp1_type];
@@ -159,9 +159,10 @@ void Tournament::printWinner()
 		finishStandings(team2);
 	Creature* tempCr;
 	int team_num;
+	int top_num = (fighters < 3) ? fighters : 3;
 
-	std::cout << "\n" << "Top 3:" << std::endl;
-	for (int i = 1; i < 4; i++)
+	std::cout << "\n" << "Top " << top_num << ":" << std::endl;
+	for (int i = 1; i < top_num+1; i++)
 	{
 		tempCr = standings->remove();
 		team_num = team->remove();
@@ -171,7 +172,7 @@ void Tournament::printWinner()
 		top3->add(tempCr);
 		top3team->add(team_num);
 	}
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < top_num; i++)
 	{
 		standings->add(top3->remove());
 		team->add(top3team->remove());

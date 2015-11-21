@@ -5,7 +5,6 @@
 *********************************************************************/
 
 #include <iostream>
-#include <iomanip>
 #include "Creature.hpp"
 #include "Barbarian.hpp"
 #include "Reptile.hpp"
@@ -19,9 +18,37 @@
 #include <stdlib.h>		// for srand()
 #include <ctime>		// for time()
 
+void initialTesting();
+
 int main()
 {
 	srand(std::time(0)); // seed the random number generator used Creature die function
+
+	/* testing Tournament */
+	Team* testTeam = new Team(1);
+	testTeam->addMember(new Bluemen);
+	testTeam->addMember(new Goblin);
+	testTeam->addMember(new Shadow);
+
+	Team* testTeam2 = new Team(2);
+	testTeam2->addMember(new Goblin);
+	testTeam2->addMember(new Goblin);
+	testTeam2->addMember(new Reptile);
+
+	Tournament* testTourney = new Tournament(testTeam, testTeam2);
+	std::cout << "Starting tournament." << std::endl;
+	testTourney->doTourney();
+	testTourney->printWinner();
+	testTourney->printStandings();
+
+	// don't delete teams as they're deleted by testTourney
+	
+	if(testTourney)
+		delete testTourney;
+}
+
+void initialTesting()
+{
 	/* testing Stack */
 	// Stack* testStack = new Stack;
 	// testStack->add(new Barbarian);
@@ -76,26 +103,26 @@ int main()
 	// testCreature->listStats();
 
 	/* testing Tournament */
-	Team* testTeam = new Team;
-	testTeam->addMember(new Barbarian);
-	testTeam->addMember(new Goblin);
-	testTeam->addMember(new Bluemen);
+	// Team* testTeam = new Team(1);
+	// testTeam->addMember(new Bluemen);
+	// testTeam->addMember(new Goblin);
+	// testTeam->addMember(new Shadow);
 
-	Team* testTeam2 = new Team;
-	testTeam2->addMember(new Bluemen);
-	testTeam2->addMember(new Reptile);
-	testTeam2->addMember(new Shadow);
+	// Team* testTeam2 = new Team(2);
+	// testTeam2->addMember(new Goblin);
+	// testTeam2->addMember(new Goblin);
+	// testTeam2->addMember(new Reptile);
 
-	Tournament* testTourney = new Tournament(testTeam, testTeam2);
-	std::cout << "Starting tournament." << std::endl;
-	testTourney->doTourney();
-	testTourney->printWinner();
-	testTourney->printStandings();
+	// Tournament* testTourney = new Tournament(testTeam, testTeam2);
+	// std::cout << "Starting tournament." << std::endl;
+	// testTourney->doTourney();
+	// testTourney->printWinner();
+	// testTourney->printStandings();
 
-	// don't delete teams as they're deleted by testTourney
+	// // don't delete teams as they're deleted by testTourney
 	
-	if(testTourney)
-		delete testTourney;
+	// if(testTourney)
+	// 	delete testTourney;
 	// std::cout << "testTeam: " << &testTeam << std::endl;
 	// if(testTeam != NULL)
 	// 	delete testTeam;

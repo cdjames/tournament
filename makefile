@@ -14,7 +14,7 @@ LDFLAGS =
 # LDFLAGS = -lboost_date_time
 
 SRCS = Creature.cpp Goblin.cpp Barbarian.cpp Reptile.cpp Bluemen.cpp Shadow.cpp
-SRCS += Stack.cpp Queue.cpp
+SRCS += Stack.cpp Queue.cpp IntStack.cpp
 SRCS += Team.cpp Tournament.cpp
 # SRCS += game.cpp 
 SRCS += main.cpp 
@@ -25,7 +25,7 @@ LNKS := ${OBJS}
 # HDRS = ${SRCS:.cpp=.hpp}
 
 HDRS = Creature.cpp Goblin.cpp Barbarian.cpp Reptile.cpp Bluemen.cpp Shadow.cpp
-HDRS += Stack.hpp Queue.hpp
+HDRS += Stack.hpp Queue.hpp IntStack.hpp
 HDRS += Team.hpp Tournament.hpp
 
 # ${OBJS}: %.o : %.hpp

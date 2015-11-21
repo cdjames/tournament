@@ -10,10 +10,11 @@
 // 	Queue* members;
 // 	Stack* losers;
 	
-Team::Team()
+Team::Team(int num)
 {
 	members = new Queue;
 	losers = new Stack;
+	number = num;
 }
 
 Team::~Team()
@@ -63,15 +64,15 @@ void Team::moveFighters()
 		{
 			losers->add(tempCr);
 			active_members--;
-			std::cout << "team " << this << " active_members: " << active_members << std::endl;
+			// std::cout << "team " << this << " active_members: " << active_members << std::endl;
 		}
 		else
 		{
-			std::cout << "team " << this << " fighter " 
-			<< tempCr->getType() << " healed to " 
-			<< tempCr->heal() << " hit points" << std::endl;
+			// std::cout << "team " << this << " fighter " 
+			// << tempCr->getType() << " healed to " 
+			// << tempCr->heal() << " hit points" << std::endl;
 			members->addBack(tempCr);
-			std::cout << "team " << this << " active_members: " << active_members << std::endl;
+			// std::cout << "team " << this << " active_members: " << active_members << std::endl;
 		}
 	}
 	return;
@@ -81,6 +82,7 @@ int Team::addPoints(int points)
 {
 	this->points += points;
 	return getPoints();
+	// return points;
 }
 
 int Team::getPoints()
@@ -128,4 +130,9 @@ void Team::resetTeam()
 		std::cout << "Queue is empty." << std::endl;
 
 	return;
+}
+
+int Team::getNumber()
+{
+	return number;
 }

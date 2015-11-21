@@ -10,8 +10,10 @@
 #include "Team.hpp"
 #include "Creature.hpp"
 #include "Stack.hpp"
+#include "IntStack.hpp"
 #include "Queue.hpp"
 #include <string>
+#include <vector>
 // #include "CharType.hpp" // already included in Creature
 
 class Tournament
@@ -25,6 +27,8 @@ private:
 	std::string creature[6];
 	const int killBonus;
 	int rounds;
+	IntStack* team;
+	IntStack* top3team;
 	
 public:
 	Tournament(Team* one = NULL, Team* two = NULL);
@@ -35,7 +39,7 @@ public:
 
 	void doRound(Creature* opp1, Creature* opp2);
 
-	void moveToStandings(Creature* dead_creature);
+	void moveToStandings(Creature* dead_creature, int team_num);
 
 	int computePoints(CharType attacker_type, CharType defender_type, int damage);
 

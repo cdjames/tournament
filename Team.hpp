@@ -7,12 +7,13 @@ class Team
 {
 private:
 	int points,
-		active_members;
+		active_members,
+		number;
 	Queue* members;
 	Stack* losers;
 	
 public:
-	Team();
+	Team(int num = 1);
 	
 	~Team();
 
@@ -31,6 +32,8 @@ public:
 	int getPoints();
 
 	void resetTeam();
+
+	int getNumber();
 
 };
 

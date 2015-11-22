@@ -64,7 +64,7 @@ public:
 	** Description: 
 	** Return the top value without removing
 	*********************************************************************/
-	Creature* get();
+	Creature* get() const;
 };
 
 #endif

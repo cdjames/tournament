@@ -1,10 +1,12 @@
 /*********************************************************************
 ** Author: Collin James
-** Date: 
-** Description: 
+** Date: 11/21/15
+** Description: Program to test Tournament, Team, and updated Creature
 *********************************************************************/
 
 #include <iostream>
+#include <stdlib.h>		// for srand()
+#include <ctime>		// for time()
 #include "Creature.hpp" // "CharType.hpp" in Creature.hpp
 #include "Barbarian.hpp"
 #include "Reptile.hpp"
@@ -13,30 +15,19 @@
 #include "Shadow.hpp"
 #include "Team.hpp"
 #include "Tournament.hpp"
-#include <stdlib.h>		// for srand()
-#include <ctime>		// for time()
-
-int mainMenu(int player);
-
-void intakeInt(int &num_items, std::string message);
-
-void clearCin();
-
-bool cinFail();
-
-void addCreature(int type, Team* team);
-
-void initialTesting();
+#include "main.hpp"
 
 int main()
 {
 	srand(std::time(0)); // seed the random number generator used by Creature die function
 
+	/* Create your (empty) teams */
 	Team* team1 = new Team(1);
 	Team* team2 = new Team(2);
 
+	/* Get number of fighters from user*/
 	int fighters;
-	intakeInt(fighters, "the number of fighters. Max is 20.");
+	intakeInt(fighters, "the number of fighters per team. Max is 20.");
 
 	/* get Player 1 creatures and assemble team */
 	for (int i = 0; i < fighters; i++)
@@ -44,12 +35,14 @@ int main()
 		int choice = mainMenu(1);
 		addCreature(choice, team1);
 	}
+	std::cout << "Player 1 added " << fighters << " fighters." << std::endl;
 	/* get Player 2 creatures and assemble team */
 	for (int i = 0; i < fighters; i++)
 	{
 		int choice = mainMenu(2);
 		addCreature(choice, team2);
 	}
+	std::cout << "Player 2 added " << fighters << " fighters." << std::endl;
 
 	/* assemble Tournament */
 	Tournament* testTourney = new Tournament(team1, team2, fighters*2);
@@ -58,7 +51,8 @@ int main()
 
 	testTourney->doTourney();
 	testTourney->printWinner();
-	testTourney->printStandings();
+	// testTourney->printStandings();
+	printTheStandings(testTourney);
 
 	// don't delete teams as they're deleted by testTourney
 	
@@ -91,6 +85,52 @@ int mainMenu(int player)
 	return input;
 }
 
+int printMenu()
+{
+	int input = -1;
+
+	std::cout << std::endl;
+	std::cout << "Choose an action:" << std::endl;
+	std::cout << "   1 - Print the standings" << std::endl;
+	std::cout << "   0 - Quit program" << std::endl;
+
+	std::cin >> input;
+
+	/* test for bad input and loop until good */
+	while(input < 0 || input > 1 || cinFail())
+	{
+		std::cout << "Please enter 1 or 0." << std::endl;
+		clearCin(); // clear cin, otherwise endless loop!
+		input = printMenu(); // run menu again
+	}
+
+	return input;
+}
+
+void printTheStandings(Tournament* tourney)
+{
+	int input = -1;
+	/* loop until user enters 0 for quit */
+	while(input < 0)
+	{
+		/* Present menu to user. mainMenu() does input error-checking and loops
+			until good input */
+		input = printMenu();
+
+		clearCin(); // get cin ready for next input
+
+		switch(input)
+		{
+			case 1: // 1
+				tourney->printStandings();
+				break;
+			default:
+				break;
+
+		}
+	}
+}
+
 void addCreature(int type, Team* team)
 {
 	switch(type)
@@ -117,7 +157,7 @@ void addCreature(int type, Team* team)
 }
 
 void intakeInt(int &num_items, std::string message)
-{ // not in spec
+{ 
 	// int imax = std::numeric_limits<int>::max(); // upper limit for ints on system
 	int imax = 20; // upper limit for ints on system
 	std::cout << "Please enter "<< message << std::endl;

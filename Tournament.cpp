@@ -139,7 +139,7 @@ int Tournament::computePoints(CharType attacker_type, CharType defender_type, in
 	// std::cout << "damage is " << damage << "; defender / attacker = " << static_cast<double>(static_cast<double>(defender_type) / static_cast<double>(attacker_type)) << std::endl;
 	// std::cout << "points is " << ceil(damage * static_cast<double>(static_cast<double>(defender_type) / static_cast<double>(attacker_type))) << std::endl;
 	
-	/* Award ration is determined by defender type ÷ attacker type • damage 
+	/* Award ratio is determined by defender type ÷ attacker type • damage 
 	 * Thus, if a Goblin attacks a Blue Man and does 2 damage, the final result
 	 * would be 2 • 5 ÷ 1, or 10 points. The Blue Man has a higher status than Goblin
 	 * and so the Goblin earns more points with a successful attack.

@@ -6,8 +6,8 @@
 CXX = g++
 CXXFLAGS =  
 # CXXFLAGS = -std=c++0x 
-# CXXFLAGS += -Wall 
-# CXXFLAGS += -pedantic-errors
+CXXFLAGS += -Wall 
+CXXFLAGS += -pedantic-errors
 # CXXFLAGS += -g #debugging
 
 LDFLAGS = 
@@ -22,11 +22,11 @@ SRCS += main.cpp
 OBJS = ${SRCS:.cpp=.o}
 LNKS := ${OBJS}
 
-# HDRS = ${SRCS:.cpp=.hpp}
+HDRS = ${SRCS:.cpp=.hpp}
 
-HDRS = Creature.cpp Goblin.cpp Barbarian.cpp Reptile.cpp Bluemen.cpp Shadow.cpp
-HDRS += Stack.hpp Queue.hpp IntStack.hpp
-HDRS += Team.hpp Tournament.hpp
+# HDRS = Creature.cpp Goblin.cpp Barbarian.cpp Reptile.cpp Bluemen.cpp Shadow.cpp
+# HDRS += Stack.hpp Queue.hpp IntStack.hpp
+# HDRS += Team.hpp Tournament.hpp
 
 # ${OBJS}: %.o : %.hpp
 

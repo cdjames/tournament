@@ -53,7 +53,7 @@ Creature* Stack::remove()
 		return NULL;	// return junk number
 }
 
-Creature* Stack::get()
+Creature* Stack::get() const
 {
 	// std::cout << "head value is: " << head->value << std::endl;
 	return head->value;

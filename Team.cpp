@@ -20,6 +20,7 @@ Team::Team(int num)
 	this->losers = new Stack;
 	this->number = num;
 	this->points = 0;
+	this->active_members = 0;
 }
 
 Team::~Team()

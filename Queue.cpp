@@ -19,7 +19,7 @@ Queue::Queue(Creature* val)
 Queue::~Queue()
 {
 	Queuenode *tempPtr = front; // point at front
-	Queuenode *frontPtr = front; // point at front
+	// Queuenode *frontPtr = front; // point at front
 
 	/* loop until done; set done to true when the element behind the one deleted is
 	 * back at front */

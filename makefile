@@ -6,8 +6,8 @@
 CXX = g++
 CXXFLAGS =  
 # CXXFLAGS = -std=c++0x 
-CXXFLAGS += -Wall 
-CXXFLAGS += -pedantic-errors
+# CXXFLAGS += -Wall 
+# CXXFLAGS += -pedantic-errors
 # CXXFLAGS += -g #debugging
 
 LDFLAGS = 

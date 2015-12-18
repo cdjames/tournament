@@ -8,4 +8,4 @@ On unix-like systems, call `make` from a terminal.
 
 ## Usage
 
-Call `./game` from a terminal or put game somewhere in your path (/usr/local/bin, /opt/local/bin on some systems).
+Call `./game` from a terminal or put game somewhere in your path (`/usr/local/bin`, `/opt/local/bin` on some systems).
